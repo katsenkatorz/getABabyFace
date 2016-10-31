@@ -37,28 +37,28 @@ class Media
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="name", type="string", length=100)
+	 * @ORM\Column(name="Name", type="string", length=100)
 	 */
 	private $name;
 
 	/**
 	 * @var \DateTime
 	 *
-	 * @ORM\Column(name="created", type="datetime")
+	 * @ORM\Column(name="Created", type="datetime")
 	 */
 	private $created;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="description", type="text")
+	 * @ORM\Column(name="Description", type="text")
 	 */
 	private $description;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="size", type="decimal", precision=10, scale=0)
+	 * @ORM\Column(name="Size", type="decimal", precision=10, scale=0)
 	 */
 	private $size;
 
@@ -230,52 +230,5 @@ class Media
 	{
 		return $this->path;
 	}
-
-    /**
-     * Set user
-     *
-     * @param \UserBundle\Entity\User $user
-     *
-     * @return Media
-     */
-    public function setUser(\UserBundle\Entity\User $user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \UserBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * Set album
-     *
-     * @param \AdminBundle\Entity\Album $album
-     *
-     * @return Media
-     */
-    public function setAlbum(\AdminBundle\Entity\Album $album)
-    {
-        $this->album = $album;
-
-        return $this;
-    }
-
-    /**
-     * Get album
-     *
-     * @return \AdminBundle\Entity\Album
-     */
-    public function getAlbum()
-    {
-        return $this->album;
-    }
 }
+

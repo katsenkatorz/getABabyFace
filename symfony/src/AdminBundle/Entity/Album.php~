@@ -38,7 +38,7 @@ class Album
 	/**
 	 * @var \DateTime
 	 *
-	 * @ORM\Column(name="created", type="datetime")
+	 * @ORM\Column(name="Created", type="datetime")
 	 */
 	private $created;
 
@@ -100,28 +100,5 @@ class Album
 	{
 		return $this->created;
 	}
-
-    /**
-     * Set user
-     *
-     * @param \UserBundle\Entity\User $user
-     *
-     * @return Album
-     */
-    public function setUser(\UserBundle\Entity\User $user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \UserBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
 }
+

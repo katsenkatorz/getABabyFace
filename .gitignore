@@ -16,6 +16,8 @@
 !var/sessions/.gitkeep
 /.idea
 /.idea/
+/.idea/*
+.idea/*
 
 # Parameters
 /app/config/parameters.yml
