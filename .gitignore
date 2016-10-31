@@ -14,6 +14,8 @@
 !var/cache/.gitkeep
 !var/logs/.gitkeep
 !var/sessions/.gitkeep
+/.idea
+/.idea/
 
 # Parameters
 /app/config/parameters.yml
@@ -95,7 +97,4 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
-# Windows shortcuts
-*.lnk
-.idea/*
 .idea/workspace.xml
