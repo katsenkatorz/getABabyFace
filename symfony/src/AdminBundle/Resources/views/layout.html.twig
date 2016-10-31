@@ -1,15 +1,22 @@
 {% extends ":Admin:layout.html.twig" %}
- {% block stylesheets %}
+
+
+{% block stylesheets %}
      <script src="{{ asset('bundles/admin/js/jquery-3.1.1.min.js') }}"></script>
      <link rel="stylesheet" href="{{ asset('bundles/admin/css/bootstrap.min.css') }}" />
      <link rel="stylesheet" href="{{ asset('bundles/admin/css/style.min.css') }}" />
- {% endblock %}
+{% endblock %}
 
 {% block body %}
     {% include "AdminBundle:_shared:header.html.twig" %}
-    <main>
-        {% block admin_body %}
-        {% endblock %}
+    <main class="container">
+        <section class="col-md-2">
+
+        </section>
+        <section class="col-md-10">
+            {% block admin_body %}
+            {% endblock %}
+        </section>
     </main>
 
 {% endblock %}
