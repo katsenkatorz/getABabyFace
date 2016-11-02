@@ -7,11 +7,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand"><span>{{ 'admin'|trans }}</span></a>
+            <a class="navbar-brand" href="{{ path('admin_homepage') }}"><span>{{ 'admin'|trans }}</span></a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li class="active">
+                <li {% if app.request.get('_route') == 'album_index' %}class="active"{% endif %}>
                     <a href="{{ path('album_index') }}">{{ 'album.albums'|trans }}</a>
                 </li>
                 <li>
