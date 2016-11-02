@@ -1,0 +1,20 @@
+album:
+    album: Album
+    albums: Albums
+    edit_album: Editer l'album
+    create_album: Créer un album
+    delete_album: Supprimer l'album
+    list_album: Liste des albums
+    show_album: Afficher l'album
+media:
+    medias: Médias
+user:
+    users: Utilisateurs
+admin: Administration
+back_to_site: Retour vers le site
+back_to_list: Retour à la liste
+name: Nom
+id : Id
+create_by: Créé par
+created: Créé le
+action: Actions

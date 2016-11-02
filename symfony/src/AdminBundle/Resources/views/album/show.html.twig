@@ -1,35 +1,39 @@
 {% extends "AdminBundle::layout.html.twig" %}
 {% block admin_body %}
-    <h1>Album</h1>
-
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ album.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ album.name }}</td>
-            </tr>
-            <tr>
-                <th>Created</th>
-                <td>{% if album.created %}{{ album.created|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('album_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('album_edit', { 'id': album.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+    <h1>{{ 'album.album'|trans }}</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover table-striped">
+                <tbody>
+                <tr>
+                    <th>{{ 'id'|trans }}</th>
+                    <td>{{ album.id }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'name'|trans }}</th>
+                    <td>{{ album.name }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'create_by'|trans }}</th>
+                    <td>{{ album.user }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'created'|trans }}</th>
+                    <td>{% if album.created %}{{ album.created|date('d/m/Y H:i') }}{% endif %}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+    <div class="pull-right row">
+        <div class="col-md-12">
+            <a class="btn btn-default" title="{{ 'back_to_list'|trans }}" href="{{ path('album_index') }}"><i class="material-icons md-36">arrow_back</i></a>
+            <a class="btn btn-default" title="{{ 'album.edit_album'|trans }}" href="{{ path('album_edit', { 'id': album.id }) }}"><i class="material-icons md-36">edit</i>
+            </a>
+            {{ form_start(delete_form, { 'attr': {'class': 'display-inline'} }) }}
+            <button class="btn btn-danger" type="submit"><i class="material-icons md-36">delete</i></button>
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        </div>
+    </div>
 {% endblock %}

@@ -7,21 +7,21 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand"><span>Administration</span></a>
+            <a class="navbar-brand"><span>{{ 'admin'|trans }}</span></a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li class="active">
-                    <a href="{{ path('album_index') }}">Albums</a>
+                    <a href="{{ path('album_index') }}">{{ 'album.albums'|trans }}</a>
                 </li>
                 <li>
-                    <a href="#">Médias</a>
+                    <a href="#">{{ 'media.medias'|trans }}</a>
                 </li>
                 <li>
-                    <a href="#">Utilisateurs</a>
+                    <a href="#">{{ 'user.users'|trans }}</a>
                 </li>
             </ul>
-            <a class="btn btn-default navbar-btn" href="{{ path('main_homepage') }}">Retour vers le site</a>
+            <a class="btn btn-default navbar-btn" href="{{ path('main_homepage') }}">{{ 'back_to_site'|trans }}</a>
         </div>
     </div>
 </header>
