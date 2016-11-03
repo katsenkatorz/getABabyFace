@@ -15,13 +15,13 @@
         {% for album in albums %}
             <tr>
                 <td>
-                    <a href="{{ path('album_show', { 'id': album.id }) }}">{{ album.id }}</a>
+                    <a class="btn" href="{{ path('album_show', { 'id': album.id }) }}">{{ album.id }}</a>
                 </td>
                 <td>{{ album.name }}</td>
                 <td>{% if album.created %}{{ album.created|date('d/m/Y H:i') }}{% endif %}</td>
                 <td>
-                    <a title="{{ 'album.show_album'|trans }}" href="{{ path('album_show', { 'id': album.id }) }}"><i class="material-icons">description</i></a>
-                    <a title="{{ 'album.edit_album'|trans }}" href="{{ path('album_edit', { 'id': album.id }) }}"><i class="material-icons">edit</i></a>
+                    <a class="btn" title="{{ 'album.show_album'|trans }}" href="{{ path('album_show', { 'id': album.id }) }}"><i class="material-icons">description</i></a>
+                    <a class="btn" title="{{ 'album.edit_album'|trans }}" href="{{ path('album_edit', { 'id': album.id }) }}"><i class="material-icons">edit</i></a>
                 </td>
             </tr>
         {% endfor %}
