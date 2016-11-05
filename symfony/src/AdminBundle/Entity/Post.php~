@@ -1,0 +1,60 @@
+<?php
+
+namespace AdminBundle\Entity;
+
+use AdminBundle\Entity\Album;
+use Doctrine\ORM\Mapping as ORM;
+use UserBundle\Entity\User;
+
+
+/**
+ * Post
+ *
+ * @ORM\Table(name="post")
+ * @ORM\Entity(repositoryClass="AdminBundle\Repository\PostRepository")
+ */
+class Post
+{
+	/**
+	 * @var int
+	 *
+	 * @ORM\Column(name="id", type="integer")
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
+	private $id;
+
+	/**
+	 * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", cascade={"persist"})
+	 * @ORM\JoinColumn(nullable=false)
+	 */
+	private $User;
+
+	/**
+	 * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Album", cascade={"persist"})
+	 * @ORM\JoinColumn(nullable=false)
+	 */
+	private $Album;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="name", type="string", length=80)
+	 */
+	private $name;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="description", type="text", nullable=true)
+	 */
+	private $description;
+
+	/**
+	 * @var \DateTime
+	 *
+	 * @ORM\Column(name="created", type="datetime")
+	 */
+	private $created;
+
+}

@@ -1,0 +1,39 @@
+{% extends "AdminBundle::layout.html.twig" %}
+{% block admin_body %}
+    <h1>{{ 'post.post'|trans }}</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover table-striped">
+                <tbody>
+                <tr>
+                    <th>{{ 'id'|trans }}</th>
+                    <td>{{ post.id }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'name'|trans }}</th>
+                    <td>{{ post.name }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'create_by'|trans }}</th>
+                    <td>{{ post.user }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'created'|trans }}</th>
+                    <td>{% if post.created %}{{ post.created|date('d/m/Y H:i') }}{% endif %}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+    <div class="pull-right row">
+        <div class="col-md-12">
+            <a class="btn btn-default" title="{{ 'back_to_list'|trans }}" href="{{ path('post_index') }}"><i class="material-icons md-36">arrow_back</i></a>
+            <a class="btn btn-default" title="{{ 'post.edit_post'|trans }}" href="{{ path('post_edit', { 'id': post.id }) }}"><i class="material-icons md-36">edit</i>
+            </a>
+            {{ form_start(delete_form, { 'attr': {'class': 'display-inline'} }) }}
+            <button class="btn btn-danger" title="{{ 'post.delete_post'|trans }}" type="submit"><i class="material-icons md-36">delete</i></button>
+            {{ form_end(delete_form) }}
+        </div>
+    </div>
+{% endblock %}

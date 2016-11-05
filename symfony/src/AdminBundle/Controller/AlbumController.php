@@ -6,8 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AdminBundle\Entity\Album;
-use AdminBundle\Form\AlbumType;
-use UserBundle\Entity\User;
+
 
 
 /**

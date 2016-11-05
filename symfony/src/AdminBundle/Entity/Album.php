@@ -3,6 +3,7 @@
 namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use UserBundle\Entity\User;
 
 
 /**
@@ -101,27 +102,35 @@ class Album
 		return $this->created;
 	}
 
-    /**
-     * Set user
-     *
-     * @param \UserBundle\Entity\User $user
-     *
-     * @return Album
-     */
-    public function setUser(\UserBundle\Entity\User $user)
-    {
-        $this->user = $user;
+	/**
+	 * Set user
+	 *
+	 * @param User $user
+	 *
+	 * @return Album
+	 */
+	public function setUser(User $user)
+	{
+		$this->user = $user;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get user
-     *
-     * @return \UserBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
+	/**
+	 * Get user
+	 *
+	 * @return User
+	 */
+	public function getUser()
+	{
+		return $this->user;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return $this->getName();
+	}
 }

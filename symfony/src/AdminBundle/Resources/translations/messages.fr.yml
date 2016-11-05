@@ -6,16 +6,28 @@ album:
     delete_album: Supprimer l'album
     list_album: Liste des albums
     show_album: Afficher l'album
-media:
-    medias: Médias
+post:
+    posts: Posts
+    post: Post
+    list_post: Liste des posts
+    create_post: Créer un post
+    edit_post: Editer le post
+    delete_post: Supprimer le post
+    show_post: Afficher le post
 user:
     users: Utilisateurs
+    liste_users: Liste des utilisateurs
 admin: Administration
 back_to_site: Retour vers le site
 back_to_list: Retour à la liste
 name: Nom
+description: Déscription
 id : Id
 create_by: Créé par
 created: Créé le
+email: Email
+last_login: Dernière connexion
+profil: Droit
 action: Actions
-site: 'getABabyFace'
+site: getABabyFace
+nothing: Pas de résultat

@@ -2,6 +2,14 @@ admin_album:
     resource: "@AdminBundle/Resources/config/routing/album.yml"
     prefix:   /album
 
+user_album:
+    resource: "@AdminBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+
+post_album:
+    resource: "@AdminBundle/Resources/config/routing/post.yml"
+    prefix:   /post
+
 admin_homepage:
     path:     /
     defaults: { _controller: AdminBundle:Default:index }

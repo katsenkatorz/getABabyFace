@@ -11,14 +11,14 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li {% if app.request.get('_route') == 'album_index' %}class="active"{% endif %}>
+                <li {% if '/admin/album' in app.request.pathInfo  %}class="active"{% endif %}>
                     <a href="{{ path('album_index') }}">{{ 'album.albums'|trans }}</a>
                 </li>
-                <li>
-                    <a href="#">{{ 'media.medias'|trans }}</a>
+                <li {% if '/admin/post' in app.request.pathInfo  %}class="active"{% endif %}>
+                    <a href="{{ path('post_index') }}">{{ 'post.posts'|trans }}</a>
                 </li>
-                <li>
-                    <a href="#">{{ 'user.users'|trans }}</a>
+                <li {% if '/admin/user' in app.request.pathInfo  %}class="active"{% endif %}>
+                    <a href="{{ path('user_index') }}">{{ 'user.users'|trans }}</a>
                 </li>
             </ul>
             <a class="btn btn-default navbar-btn" href="{{ path('main_homepage') }}">{{ 'back_to_site'|trans }}</a>

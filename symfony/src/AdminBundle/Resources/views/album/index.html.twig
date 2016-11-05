@@ -12,23 +12,29 @@
         </tr>
         </thead>
         <tbody>
-        {% for album in albums %}
+        {% if albums|length != 0 %}
+            {% for album in albums %}
+                <tr>
+                    <td>
+                        <a class="btn" href="{{ path('album_show', { 'id': album.id }) }}">{{ album.id }}</a>
+                    </td>
+                    <td>{{ album.name }}</td>
+                    <td>{% if album.created %}{{ album.created|date('d/m/Y H:i') }}{% endif %}</td>
+                    <td>
+                        <a class="btn" title="{{ 'album.show_album'|trans }}" href="{{ path('album_show', { 'id': album.id }) }}"><i class="material-icons">description</i></a>
+                        <a class="btn" title="{{ 'album.edit_album'|trans }}" href="{{ path('album_edit', { 'id': album.id }) }}"><i class="material-icons">edit</i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
             <tr>
-                <td>
-                    <a class="btn" href="{{ path('album_show', { 'id': album.id }) }}">{{ album.id }}</a>
-                </td>
-                <td>{{ album.name }}</td>
-                <td>{% if album.created %}{{ album.created|date('d/m/Y H:i') }}{% endif %}</td>
-                <td>
-                    <a class="btn" title="{{ 'album.show_album'|trans }}" href="{{ path('album_show', { 'id': album.id }) }}"><i class="material-icons">description</i></a>
-                    <a class="btn" title="{{ 'album.edit_album'|trans }}" href="{{ path('album_edit', { 'id': album.id }) }}"><i class="material-icons">edit</i></a>
-                </td>
+                <td class="text-center" colspan="4">{{ 'nothing'|trans }}</td>
             </tr>
-        {% endfor %}
+        {% endif %}
         </tbody>
     </table>
 
 
-    <a title="{{ 'album.create_album'|trans }}" class="pull-right btn btn-success" href="{{ path('album_new') }}"><i class="material-icons md-36">note_add</i></a>
+    <a title="{{ 'album.create_album'|trans }}" class="pull-right btn btn-success" href="{{ path('album_new') }}"><i class="material-icons md-36">create_new_folder</i></a>
 
 {% endblock %}
