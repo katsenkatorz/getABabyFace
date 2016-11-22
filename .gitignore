@@ -15,9 +15,7 @@
 !var/logs/.gitkeep
 !var/sessions/.gitkeep
 /.idea
-/.idea/
-/.idea/*
-.idea/*
+
 
 # Parameters
 /app/config/parameters.yml
@@ -99,5 +97,6 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
-.idea/workspace.xml
-.idea/workspace.xml
+src/AdminBundle/Entity/File.php
+src/AdminBundle/Repository/FileRepository.php
+var/cache/
