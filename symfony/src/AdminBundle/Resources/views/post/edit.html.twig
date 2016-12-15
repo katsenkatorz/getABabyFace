@@ -1,5 +1,5 @@
 {% extends "AdminBundle::layout.html.twig" %}
-{% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
+{% form_theme edit_form with ['bootstrap_3_layout.html.twig', 'VichUploaderBundle:Form:fields.html.twig']  %}
 {% block admin_body %}
     <h1>{{ 'post.edit_post'|trans }}</h1>
     <div class="row">

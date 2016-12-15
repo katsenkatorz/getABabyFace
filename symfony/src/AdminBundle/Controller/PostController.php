@@ -2,6 +2,8 @@
 
 namespace AdminBundle\Controller;
 
+use AdminBundle\Entity\Media;
+use AdminBundle\Form\PostType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AdminBundle\Entity\Post;
@@ -21,7 +23,6 @@ class PostController extends Controller
 	{
 
 		$em = $this->getDoctrine()->getManager();
-
 		$posts = $em->getRepository('AdminBundle:Post')->findAll();
 
 		return $this->render('AdminBundle:post:index.html.twig', ['posts' => $posts]);
@@ -32,22 +33,41 @@ class PostController extends Controller
 	 *
 	 * @param Request $request
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+	 * @throws \Symfony\Component\HttpFoundation\File\Exception\FileException
 	 * @throws \LogicException
 	 */
 	public function newAction(Request $request)
 	{
 		$post = new Post();
-		$date = new \DateTime();
-		$user = $this->getUser();
 
-		$form  = $this->createForm('AdminBundle\Form\PostType', $post);
+
+		$form  = $this->createForm(PostType::class, $post);
 		$form->handleRequest($request);
-
-		$post->setCreated($date);
-		$post->setUser($user);
 
 		if ($form->isSubmitted() && $form->isValid())
 		{
+			$date = new \DateTime();
+			$user = $this->getUser();
+			//TODO : Mettre dans un service
+			//$media = new Media();
+			/** @var \Symfony\Component\HttpFoundation\File\UploadedFile $file */
+			//$file = $post->getMedia()->getName();
+
+			//$fileName =  md5(uniqid('', true)).'.'.$file->guessExtension();
+
+			//$media->setMimeType($file->getMimeType());
+			//$media->setName($fileName);
+			//$media->setOriginalName($file->getClientOriginalName());
+			//$media->setPath($file->getPath());
+			//$media->setSize($file->getSize());
+
+			// Move the file to the directory where brochures are stored
+			//$file->move($this->getParameter('media_directory'),$fileName);
+
+			$post->setCreated($date);
+			$post->setUser($user);
+			//$post->setMedia($media);
+
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($post);
 			$em->flush();
@@ -82,7 +102,7 @@ class PostController extends Controller
 	public function editAction(Request $request, Post $post)
 	{
 		$deleteForm = $this->createDeleteForm($post);
-		$editForm   = $this->createForm('AdminBundle\Form\PostType', $post);
+		$editForm   = $this->createForm(PostType::class, $post);
 		$editForm->handleRequest($request);
 
 		if ($editForm->isSubmitted() && $editForm->isValid())
@@ -91,7 +111,7 @@ class PostController extends Controller
 			$em->persist($post);
 			$em->flush();
 
-			return $this->redirectToRoute('album_edit', ['id' => $post->getId()]);
+			return $this->redirectToRoute('post_edit', ['id' => $post->getId()]);
 		}
 
 		return $this->render('AdminBundle:post:edit.html.twig', ['post' => $post, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView(),]);

@@ -3,232 +3,135 @@
 namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 /**
  * Media
  *
- * @ORM\Table(name="media")
+ * @ORM\Table(name="file")
  * @ORM\Entity(repositoryClass="AdminBundle\Repository\MediaRepository")
+ * @Vich\Uploadable
  */
 class Media
 {
+
 	/**
-	 * @var int
-	 *
-	 * @ORM\Column(name="id", type="integer")
 	 * @ORM\Id
+	 * @ORM\Column(type="integer")
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 */
 	private $id;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+	 * @var string
+	 *
+	 * @ORM\Column(name="original_name", type="string", length=100)
 	 * @ORM\JoinColumn(nullable=false)
 	 */
-	private $user;
+	private $originalName;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Album")
+	 * @var int
+	 *
+	 * @ORM\Column(name="size", type="integer")
 	 * @ORM\JoinColumn(nullable=false)
-	 */
-	private $album;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="Name", type="string", length=100)
-	 */
-	private $name;
-
-	/**
-	 * @var \DateTime
-	 *
-	 * @ORM\Column(name="Created", type="datetime")
-	 */
-	private $created;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="Description", type="text")
-	 */
-	private $description;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="Size", type="decimal", precision=10, scale=0)
 	 */
 	private $size;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="extension", type="string", length=10)
+	 * @ORM\Column(name="mime_type", type="string", length=100)
+	 * @ORM\JoinColumn(nullable=false)
 	 */
-	private $extension;
+	private $mimeType;
 
 	/**
 	 * @var string
 	 *
 	 * @ORM\Column(name="path", type="string", length=255)
+	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $path;
 
-
 	/**
-	 * Get id
+	 * NOTE: This is not a mapped field of entity metadata, just a simple property.
 	 *
-	 * @return int
+	 * @Vich\UploadableField(mapping="media_image", fileNameProperty="imageName")
+	 *
+	 * @var File
 	 */
-	public function getId()
-	{
-		return $this->id;
-	}
+	private $imageFile;
 
 	/**
-	 * Set name
+	 * @ORM\Column(type="string", length=255)
 	 *
-	 * @param string $name
+	 * @var string
+	 */
+	private $imageName;
+
+	/**
+	 * @ORM\Column(type="datetime")
+	 *
+	 * @var \DateTime
+	 */
+	private $updatedAt;
+
+	/**
+	 * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+	 * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+	 * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+	 * must be able to accept an instance of 'File' as the bundle will inject one here
+	 * during Doctrine hydration.
+	 *
+	 * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
 	 *
 	 * @return Media
 	 */
-	public function setName($name)
+	public function setImageFile(File $image = null)
 	{
-		$this->name = $name;
+		$this->imageFile = $image;
+
+		if ($image)
+		{
+			// It is required that at least one field changes if you are using doctrine
+			// otherwise the event listeners won't be called and the file is lost
+			$this->updatedAt = new \DateTime('now');
+		}
 
 		return $this;
 	}
 
 	/**
-	 * Get name
-	 *
-	 * @return string
+	 * @return File|null
 	 */
-	public function getName()
+	public function getImageFile()
 	{
-		return $this->name;
+		return $this->imageFile;
 	}
 
 	/**
-	 * Set created
-	 *
-	 * @param \DateTime $created
+	 * @param string $imageName
 	 *
 	 * @return Media
 	 */
-	public function setCreated($created)
+	public function setImageName($imageName)
 	{
-		$this->created = $created;
+		$this->imageName = $imageName;
 
 		return $this;
 	}
 
 	/**
-	 * Get created
-	 *
-	 * @return \DateTime
+	 * @return string|null
 	 */
-	public function getCreated()
+	public function getImageName()
 	{
-		return $this->created;
+		return $this->imageName;
 	}
 
-	/**
-	 * Set description
-	 *
-	 * @param string $description
-	 *
-	 * @return Media
-	 */
-	public function setDescription($description)
-	{
-		$this->description = $description;
 
-		return $this;
-	}
-
-	/**
-	 * Get description
-	 *
-	 * @return string
-	 */
-	public function getDescription()
-	{
-		return $this->description;
-	}
-
-	/**
-	 * Set size
-	 *
-	 * @param string $size
-	 *
-	 * @return Media
-	 */
-	public function setSize($size)
-	{
-		$this->size = $size;
-
-		return $this;
-	}
-
-	/**
-	 * Get size
-	 *
-	 * @return string
-	 */
-	public function getSize()
-	{
-		return $this->size;
-	}
-
-	/**
-	 * Set extension
-	 *
-	 * @param string $extension
-	 *
-	 * @return Media
-	 */
-	public function setExtension($extension)
-	{
-		$this->extension = $extension;
-
-		return $this;
-	}
-
-	/**
-	 * Get extension
-	 *
-	 * @return string
-	 */
-	public function getExtension()
-	{
-		return $this->extension;
-	}
-
-	/**
-	 * Set path
-	 *
-	 * @param string $path
-	 *
-	 * @return Media
-	 */
-	public function setPath($path)
-	{
-		$this->path = $path;
-
-		return $this;
-	}
-
-	/**
-	 * Get path
-	 *
-	 * @return string
-	 */
-	public function getPath()
-	{
-		return $this->path;
-	}
 }
-

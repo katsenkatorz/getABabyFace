@@ -10,6 +10,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
+    media_directory: '%kernel.root_dir%/../web/uploads/media'
 
 framework:
     #esi:             ~
@@ -39,6 +40,7 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+
 
 # Doctrine Configuration
 doctrine:
@@ -102,3 +104,14 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: UserBundle\Entity\User
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+        media:
+            uri_prefix:         /uploads/media
+            upload_destination: '%kernel.root_dir%/../web/uploads/media'
+            namer:              vich_uploader.namer_uniqid
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true

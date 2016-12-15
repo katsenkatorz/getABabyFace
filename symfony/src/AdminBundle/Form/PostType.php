@@ -15,9 +15,10 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, ['label' => 'title', 'required' => true])
+            ->add('name', null, ['label' => 'Titre', 'required' => true])
             ->add('description', null, ['label' => 'description', 'required' => false])
             ->add('Album')
+		->add('media', MediaType::class)
         ;
     }
     

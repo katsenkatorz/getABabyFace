@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Controller;
 
+use AdminBundle\Form\AlbumType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -42,7 +43,7 @@ class AlbumController extends Controller
 		$date = new \DateTime();
 		$user = $this->getUser();
 
-		$form  = $this->createForm('AdminBundle\Form\AlbumType', $album);
+		$form  = $this->createForm(AlbumType::class, $album);
 		$form->handleRequest($request);
 
 		$album->setCreated($date);

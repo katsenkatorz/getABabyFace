@@ -2,9 +2,9 @@
 
 namespace AdminBundle\Entity;
 
-use AdminBundle\Entity\Album;
 use Doctrine\ORM\Mapping as ORM;
 use UserBundle\Entity\User;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -32,9 +32,15 @@ class Post
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Album", cascade={"persist","remove"})
-	 * @ORM\JoinColumn(name="id", referencedColumnName="id", onDelete="CASCADE")
+	 * @ORM\JoinColumn(onDelete="CASCADE")
 	 */
 	private $Album;
+
+	/**
+	 * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Media", cascade={"persist","remove"})
+	 * @ORM\JoinColumn(onDelete="CASCADE")
+	 */
+	private $Media;
 
 	/**
 	 * @var string
@@ -57,134 +63,157 @@ class Post
 	 */
 	private $created;
 
+	/**
+	 * Get id]
+	 *
+	 * @return integer
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
+
+	/**
+	 * Set name
+	 *
+	 * @param string $name
+	 *
+	 * @return Post
+	 */
+	public function setName($name)
+	{
+		$this->name = $name;
+
+		return $this;
+	}
+
+	/**
+	 * Get name
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return $this->name;
+	}
+
+	/**
+	 * Set description
+	 *
+	 * @param string $description
+	 *
+	 * @return Post
+	 */
+	public function setDescription($description)
+	{
+		$this->description = $description;
+
+		return $this;
+	}
+
+	/**
+	 * Get description
+	 *
+	 * @return string
+	 */
+	public function getDescription()
+	{
+		return $this->description;
+	}
+
+	/**
+	 * Set created
+	 *
+	 * @param \DateTime $created
+	 *
+	 * @return Post
+	 */
+	public function setCreated($created)
+	{
+		$this->created = $created;
+
+		return $this;
+	}
+
+	/**
+	 * Get created
+	 *
+	 * @return \DateTime
+	 */
+	public function getCreated()
+	{
+		return $this->created;
+	}
+
+	/**
+	 * Set user
+	 *
+	 * @param \UserBundle\Entity\User $user
+	 *
+	 * @return Post
+	 */
+	public function setUser(\UserBundle\Entity\User $user)
+	{
+		$this->User = $user;
+
+		return $this;
+	}
+
+	/**
+	 * Get user
+	 *
+	 * @return \UserBundle\Entity\User
+	 */
+	public function getUser()
+	{
+		return $this->User;
+	}
+
+	/**
+	 * Set Album
+	 *
+	 * @param Album $album
+	 *
+	 * @return Post
+	 */
+	public function setAlbum(Album $album)
+	{
+		$this->Album = $album;
+
+		return $this;
+	}
+
+	/**
+	 * Get album
+	 *
+	 * @return Album
+	 */
+	public function getAlbum()
+	{
+		return $this->Album;
+	}
 
     /**
-     * Get id
+     * Set media
      *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
+     * @param \AdminBundle\Entity\Media $media
      *
      * @return Post
      */
-    public function setName($name)
+    public function setMedia(\AdminBundle\Entity\Media $media = null)
     {
-        $this->name = $name;
+        $this->Media = $media;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get media
      *
-     * @return string
+     * @return \AdminBundle\Entity\Media
      */
-    public function getName()
+    public function getMedia()
     {
-        return $this->name;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Post
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set created
-     *
-     * @param \DateTime $created
-     *
-     * @return Post
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
-
-        return $this;
-    }
-
-    /**
-     * Get created
-     *
-     * @return \DateTime
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \UserBundle\Entity\User $user
-     *
-     * @return Post
-     */
-    public function setUser(\UserBundle\Entity\User $user)
-    {
-        $this->User = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \UserBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->User;
-    }
-
-    /**
-     * Set Album
-     *
-     * @param \AdminBundle\Entity\Album $album
-     *
-     * @return Post
-     */
-    public function setAlbum(\AdminBundle\Entity\Album $album)
-    {
-        $this->Album = $album;
-
-        return $this;
-    }
-
-    /**
-     * Get album
-     *
-     * @return \AdminBundle\Entity\Album
-     */
-    public function getAlbum()
-    {
-        return $this->Album;
+        return $this->Media;
     }
 }
