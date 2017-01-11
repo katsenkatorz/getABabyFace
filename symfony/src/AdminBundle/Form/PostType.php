@@ -5,6 +5,7 @@ namespace AdminBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class PostType extends AbstractType
 {
@@ -18,8 +19,12 @@ class PostType extends AbstractType
             ->add('name', null, ['label' => 'Titre', 'required' => true])
             ->add('description', null, ['label' => 'description', 'required' => false])
             ->add('Album')
-		->add('media', MediaType::class)
-        ;
+		->add('imageFile', VichImageType::class, array(
+			'required'      => false,
+			'allow_delete'  => false,
+			'download_link' => false,
+		));
+
     }
     
     /**

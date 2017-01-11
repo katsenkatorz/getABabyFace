@@ -2,16 +2,17 @@
 
 namespace AdminBundle\Entity;
 
-use AdminBundle\Entity\Album;
 use Doctrine\ORM\Mapping as ORM;
-use UserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use UserBundle\Entity\User;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 /**
  * Post
  *
- * @ORM\Table(name="post")
+ * @ORM\Table(name="POST")
  * @ORM\Entity(repositoryClass="AdminBundle\Repository\PostRepository")
  */
 class Post
@@ -32,16 +33,10 @@ class Post
 	private $User;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Album", cascade={"persist","remove"})
-	 * @ORM\JoinColumn(name="id", referencedColumnName="id", onDelete="CASCADE")
+	 * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Album", cascade={"persist"})
+	 * @ORM\JoinColumn(name="album_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	private $Album;
-
-	/**
-	 * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\File", cascade={"persist","remove"})
-	 * @ORM\JoinColumn(name="id", referencedColumnName="id", onDelete="CASCADE")
-	 */
-	private $File;
 
 	/**
 	 * @var string
@@ -65,7 +60,84 @@ class Post
 	private $created;
 
 	/**
-	 * Get id
+	 * NOTE: This is not a mapped field of entity metadata, just a simple property.
+	 *
+	 * @Vich\UploadableField(mapping="media", fileNameProperty="imageName")
+	 *
+	 * @var File
+	 */
+	private $imageFile;
+
+	/**
+	 * @ORM\Column(type="string", length=255)
+	 *
+	 * @var string
+	 */
+	private $imageName;
+
+	/**
+	 * @ORM\Column(type="datetime")
+	 *
+	 * @var \DateTime
+	 */
+	private $updatedAt;
+
+	/**
+	 * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+	 * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+	 * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+	 * must be able to accept an instance of 'File' as the bundle will inject one here
+	 * during Doctrine hydration.
+	 *
+	 * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+	 *
+	 * @return Post
+	 */
+	public function setImageFile(File $image = null)
+	{
+		$this->imageFile = $image;
+
+		if ($image)
+		{
+			// It is required that at least one field changes if you are using doctrine
+			// otherwise the event listeners won't be called and the file is lost
+			$this->updatedAt = new \DateTime('now');
+		}
+
+		return $this;
+	}
+
+	/**
+	 * @return File|null
+	 */
+	public function getImageFile()
+	{
+		return $this->imageFile;
+	}
+
+	/**
+	 * @param string $imageName
+	 *
+	 * @return Post
+	 */
+	public function setImageName($imageName)
+	{
+		$this->imageName = $imageName;
+
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getImageName()
+	{
+		return $this->imageName;
+	}
+
+
+	/**
+	 * Get id]
 	 *
 	 * @return integer
 	 */
@@ -149,11 +221,11 @@ class Post
 	/**
 	 * Set user
 	 *
-	 * @param \UserBundle\Entity\User $user
+	 * @param User $user
 	 *
 	 * @return Post
 	 */
-	public function setUser(\UserBundle\Entity\User $user)
+	public function setUser(User $user)
 	{
 		$this->User = $user;
 
@@ -163,7 +235,7 @@ class Post
 	/**
 	 * Get user
 	 *
-	 * @return \UserBundle\Entity\User
+	 * @return User
 	 */
 	public function getUser()
 	{
@@ -193,4 +265,5 @@ class Post
 	{
 		return $this->Album;
 	}
+
 }

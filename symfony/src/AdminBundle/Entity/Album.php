@@ -9,7 +9,7 @@ use UserBundle\Entity\User;
 /**
  * Album
  *
- * @ORM\Table(name="album")
+ * @ORM\Table(name="ALBUM")
  * @ORM\Entity(repositoryClass="AdminBundle\Repository\AlbumRepository")
  */
 class Album
